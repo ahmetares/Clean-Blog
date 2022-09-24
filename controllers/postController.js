@@ -3,10 +3,22 @@ const Post = require('../models/Post')
 
 
 exports.getAllPosts =  async (req,res) =>{   
-    const posts = await Post.find({}).sort('-dateCreated')    //DB DEKİ POSTLARI İNDEX.EJS YE GNDORME
-    res.render('index', {
-      posts:posts
-    })
+
+    const page = req.query.page || 1 // (direkt ilk sayfaya girerse)
+    const postsPerPage = 2
+    const postNumber = await Post.find().countDocuments();
+
+     const posts = await Post.find({})
+     .sort('-dateCreated')
+     .skip((page-1)*postsPerPage)    
+     .limit(postsPerPage)
+
+    res.render('index' , {
+      posts:posts,
+      pages: Math.ceil(postNumber / postsPerPage ),
+      current: page
+
+    }) 
   }
 
 

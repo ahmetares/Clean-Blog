@@ -49,7 +49,7 @@ app.get('/posts/edit/:id', pageController.getEditPage)
 
 
 //server
-const port = 4000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`sunucu ${port} portunda başlatıldı...`);

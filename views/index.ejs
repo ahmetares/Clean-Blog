@@ -31,31 +31,53 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-        
-        <% for (let i = 0; i < posts.length; i++) {  %> 
-        
-          <div class="post-preview">
-              <a href="/posts/<%= posts[i]._id %>">
-                <h2 class="post-title">
-                 <%= posts[i].title %>
-                </h2>
-                <h3 class="post-subtitle">
-                  <%= posts[i].detail %>
-                </h3>
-              </a>
-              <p class="post-meta"><%=posts[i].dateCreated%> </p>
-            </div>
-            <hr>
 
-           <% } %> 
+            <% for (let i=0; i < posts.length; i++) { %>
 
-            <!-- Pager -->
-            <div class="clearfix">
-              <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-            </div>
+              <div class="post-preview">
+                <a href="/posts/<%= posts[i]._id %>">
+                  <h2 class="post-title">
+                    <%= posts[i].title %>
+                  </h2>
+                  <h3 class="post-subtitle">
+                    <%= posts[i].detail %>
+                  </h3>
+                </a>
+                <p class="post-meta">
+                  <%=posts[i].dateCreated%>
+                </p>
+              </div>
+              <hr>
+
+              <% } %>
+
+                <!-- Pager -->
+                <div class="clearfix">
+
+                  <%if (current==1) {%>
+                   <a class="btn btn-primary float-right" href="/?page=<%= Number(current)+1 %> ">Older Posts &rarr;</a>
+                   <% } %>
+                
+                  <%if (current==pages) {%>
+                   <a class="btn btn-primary float-left" href="/?page=<%= Number(current)-1 %> ">&larr; Newer Posts </a>
+                   <% } %>
+                  
+                  <%if (current !=1 && current !=pages) { %>
+                     <a class="btn btn-primary float-right" href="/?page=<%= Number(current)+1 %> ">Older Posts &rarr;</a>
+                            <a class="btn btn-primary float-left" href="/?page=<%= Number(current)-1 %> ">&larr; Newer Posts </a>
+                   <% } %>
+                </div>
+
+
+
+
+
           </div>
         </div>
       </div>
+
+
+
 
       <hr>
 
